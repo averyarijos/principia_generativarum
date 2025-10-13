@@ -1,10 +1,74 @@
 """
-Generative Logic System - Enterprise Implementation
-A production-ready implementation of Generative Logic that metabolizes
-contradictions into enhanced possibilities.
+Generative Logic System
+=================================
 
-Based on: Principia Generativarum - Transcendental Induction Logics
-Author: Avery Alexander Rijos
+This module implements a production-oriented prototype of the "Generative
+Logic" architecture described in Principia Generativarum. The system is
+organized into three layers:
+
+- Domain layer: core data types (Proposition, GenerativeState,
+    Contradiction, MetabolicScar) and a multi-valued generative truth
+    representation (`GenerativeTruthValue`).
+- Logical operators: composable operators (generative zero operator,
+    generative negation, metabolic composition) that transform propositions
+    and contradictions into enriched possibility spaces.
+- Application & infrastructure: `GenerativeLogicEngine` orchestrates
+    assertion, contradiction detection, metabolism, recursive enhancement,
+    and exposes metrics via `GenerativeLogicMetricsCollector`.
+
+Design goals / contract
+-----------------------
+- Inputs: `Proposition` objects (immutable, string content + metadata).
+- Outputs: `GenerativeState` objects containing a primary proposition,
+    a generative truth value (`GenerativeTruthValue`), a `possibility_space`
+    (set of `Proposition`) and a `metabolic_trace` (list of transformations).
+- Error modes: the module intentionally uses simple, deterministic
+    strategies for demonstration. Incomplete or malformed propositions may
+    produce syntactic "negations" rather than semantic negation; callers
+    should validate content when integrating with external systems.
+
+Key principles encoded
+----------------------
+- Contradiction Productivity (gL-T1): contradictions are not failures but
+    sources of generativity. They are routed through the generative zero
+    operator (⊙₀) to expand possibility spaces rather than producing
+    explosion.
+- Recursive Enhancement (gL-T2): operators may increase a proposition's
+    generative truth value through repeated application.
+- Non-Explosion (gL4): the system avoids trivialization; contradictions do
+    not imply arbitrary truths.
+
+Extensibility notes
+-------------------
+- Expansion strategies are pluggable. Replace `_default_expansion_strategy`
+    with domain-aware generation (ML model, knowledge graph traversal, etc.).
+- Replace string-based negation with a structured AST for semantic
+    negation if you need sound inference.
+
+Usage (quick demo)
+------------------
+Run this file directly to see an example demonstration. Typical flow:
+
+        python generative_logic.py
+
+Or use the API programmatically:
+
+        engine = GenerativeLogicEngine()
+        p = Proposition("Some claim")
+        state = engine.assert_proposition(p)
+
+Testing and determinism
+-----------------------
+- For deterministic tests, inject a stable `expansion_strategy` and
+    replace `datetime.utcnow` calls with a fixed factory (or patch using
+    `freezegun` or similar).
+
+Security and privacy
+--------------------
+- This module does not transmit data externally. When integrating with
+    models or services to expand possibility spaces, ensure data policies
+    and privacy constraints are respected.
+
 """
 
 from __future__ import annotations
@@ -13,10 +77,20 @@ from typing import Any, Callable, Dict, List, Optional, Set, Tuple, Union
 from enum import Enum, auto
 from abc import ABC, abstractmethod
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from collections import defaultdict
 import hashlib
 import json
+import os
+
+
+def now_utc() -> datetime:
+    """Return timezone-aware UTC datetime for consistent timestamps.
+
+    Use this helper throughout the module so tests can patch or replace it
+    easily and so timestamps are timezone-aware instead of naive.
+    """
+    return datetime.now(timezone.utc)
 
 # ========================================================================
 # DOMAIN LAYER - Core Generative Logic Entities
@@ -84,12 +158,12 @@ class GenerativeState:
     truth_value: GenerativeTruthValue
     possibility_space: Set[Proposition] = field(default_factory=set)
     metabolic_trace: List[str] = field(default_factory=list)
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=now_utc)
     
     def log_transformation(self, operation: str) -> None:
         """Records metabolic operations for audit trail."""
         self.metabolic_trace.append(
-            f"{datetime.utcnow().isoformat()}: {operation}"
+            f"{now_utc().isoformat()}: {operation}"
         )
 
 
@@ -102,7 +176,7 @@ class Contradiction:
     proposition_a: Proposition
     proposition_b: Proposition
     context: Dict[str, Any] = field(default_factory=dict)
-    detected_at: datetime = field(default_factory=datetime.utcnow)
+    detected_at: datetime = field(default_factory=now_utc)
     
     def __repr__(self) -> str:
         return f"⊥({self.proposition_a} ∧ ¬{self.proposition_b})"
@@ -119,7 +193,7 @@ class MetabolicScar:
     enhancement_delta: int
     metabolized_at: datetime
     scar_id: str = field(default_factory=lambda: hashlib.sha256(
-        str(datetime.utcnow().timestamp()).encode()
+        str(now_utc().timestamp()).encode()
     ).hexdigest()[:12])
 
 
@@ -342,7 +416,7 @@ class GenerativeLogicEngine:
             original_contradiction=contradiction,
             generated_possibilities=state.possibility_space,
             enhancement_delta=2,
-            metabolized_at=datetime.utcnow()
+            metabolized_at=now_utc()
         )
         self.metabolic_archive.append(scar)
         
@@ -464,7 +538,7 @@ class GenerativeLogicEngine:
         Exports complete system state for persistence or inspection.
         """
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": now_utc().isoformat(),
             "propositions": {
                 k: {
                     "content": v.proposition.content,
@@ -477,6 +551,48 @@ class GenerativeLogicEngine:
             "metrics": self.metrics,
             "health": self.get_system_health()
         }
+
+    def save_state(self, path: str) -> None:
+        """Save exported state as JSON to `path` (atomic write).
+
+        This is intentionally simple JSON persistence for demonstrations
+        and debugging. For production use, consider append-only JSONL or a
+        transactional store.
+        """
+        data = self.export_state()
+        tmp = f"{path}.tmp"
+        with open(tmp, "w", encoding="utf-8") as fh:
+            json.dump(data, fh, indent=2)
+        os.replace(tmp, path)
+
+    @classmethod
+    def load_state(cls, path: str) -> "GenerativeLogicEngine":
+        """Load engine state from JSON previously created by `save_state`.
+
+        This creates a new engine instance and restores propositions and
+        scars at a best-effort level. Types like timestamps are left as
+        ISO strings for simplicity.
+        """
+        with open(path, "r", encoding="utf-8") as fh:
+            data = json.load(fh)
+
+        engine = cls()
+        # Restore propositions minimally (content and truth value)
+        for k, v in data.get("propositions", {}).items():
+            prop = Proposition(v["content"]) if isinstance(v, dict) else Proposition(k)
+            truth = getattr(GenerativeTruthValue, v.get("truth_value", "G_BASIC"))
+            state = GenerativeState(
+                proposition=prop,
+                truth_value=truth,
+                possibility_space={Proposition(c) for c in v.get("possibility_space", [])},
+                metabolic_trace=v.get("metabolic_trace", [])
+            )
+            engine.propositions[prop.content] = state
+
+        # Metrics/archives are not fully reconstructed here
+        engine.metrics.update(data.get("metrics", {}))
+
+        return engine
     
     # Private methods
     
@@ -488,12 +604,29 @@ class GenerativeLogicEngine:
         Detects classical contradictions (φ ∧ ¬φ).
         Axiom gL4: Non-Explosion - contradictions don't imply everything.
         """
-        # Simple negation detection
+        # Structured negation detection
+        # Supports simple forms: '¬(X)' and nested whitespace-insensitive matches
+        def parse_negation(text: str) -> Optional[str]:
+            text = text.strip()
+            if text.startswith("¬(") and text.endswith(")"):
+                inner = text[2:-1].strip()
+                return inner
+            return None
+
+        prop_neg = parse_negation(proposition.content)
+
         for existing_prop in self.propositions.keys():
-            # Check if this is a negation of an existing proposition
-            if (proposition.content == f"¬({existing_prop})" or
-                existing_prop == f"¬({proposition.content})"):
-                
+            existing_neg = parse_negation(existing_prop)
+
+            # proposition is negation of existing_prop
+            if prop_neg is not None and prop_neg == existing_prop:
+                return Contradiction(
+                    proposition_a=proposition,
+                    proposition_b=Proposition(existing_prop)
+                )
+
+            # existing_prop is negation of proposition
+            if existing_neg is not None and existing_neg == proposition.content:
                 return Contradiction(
                     proposition_a=proposition,
                     proposition_b=Proposition(existing_prop)
