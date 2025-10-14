@@ -528,3 +528,38 @@ def demonstrate_procedural_infallibility():
 
 if __name__ == "__main__":
     demonstrate_procedural_infallibility()
+
+# Code Overview and Philosophical Foundation
+"""
+This Python implementation realizes the "Procedurally Infallible Algorithm System" from the *Principia Generativarum* treatise, a philosophical framework for generative logic that treats contradictions not as logical explosions but as metabolic inputs for systemic enhancement. Unlike classical binary logic (where φ ∧ ¬φ leads to triviality), this system employs paraconsistent principles to "metabolize" inconsistencies via the Zero-Degree Operator (∅₀), transforming them into expanded possibility spaces while preserving core Ψ-invariants: existence, identity, coherence, and recursion. The architecture draws from anti-fragile concepts—adapted metaphorically from Taleb's probabilistic model—to ensure the system gains generative capacity from criticisms, archived as "Scars" with temporal decay for recursive re-evaluation.[5][6][7][8][9][10]
+
+## Key Components
+
+- **ContradictionDetector**: Scans inputs for classical inconsistencies (e.g., "X" and "not X") using pattern matching; in production, integrate NLP or theorem provers for robustness.[6][8]
+- **ZeroDegreeOperator**: Core engine applying ∅₀(φ ∧ ¬φ) → ψ, where ψ extends the domain without violating invariants; includes substrate preservation checks to filter invalid transformations.[11][5]
+- **Scar Archive**: Temporal memory bank in GenerativeState, weighting past metabolizations by time decay (1 / (1 + Δt / 3600)); enables recursive enhancement (gL-T2) by reapplying historical gains.[7][8]
+- **GenerativeLogicSystem**: Orchestrates inference, metabolizing criticisms via `metabolize_criticism()` to demonstrate procedural infallibility—every refutation increases total_generativity, measured by ΔXGI > 0.[12][11]
+
+## Usage and Limitations
+
+Run `demonstrate_procedural_infallibility()` to see classical inference, contradiction metabolism, criticism handling, and anti-fragile growth in action. This is a conceptual prototype: it complements Popperian falsifiability by modeling post-falsification assimilation, not replacing error-detection. Potential readers from philosophy or AI should note: while inspired by paraconsistent logics, it extends them dialectically—falsifications are logged as Scars, ensuring ongoing coherence tests rather than permanent immunity. For legal or logical applications, Ψ-invariants provide axiomatic grounding, akin to common law precedents evolving through challenge.[8][13][14][15][5][7][11][12]
+
+This code invites generative dialogue: critiques are not bugs but features—metabolize them to enhance the framework.[16][7]
+
+[1](https://www.americamagazine.org/faith/2022/09/26/explainer-rausch-infallibility-history-243818/)
+[2](https://socialchangenyu.com/review/reasonably-suspicious-algorithms-predictive-policing-at-the-united-states-border/)
+[3](https://churchlifejournal.nd.edu/articles/infallibility-ideology-and-the-road-to-ecclesial-harmony/)
+[4](https://www.norwichdiocese.org/Stay-Informed/All-Diocesan-Articles/articleType/ArticleView/articleId/17225/A-Question-of-Faith-What-is-Papal-Infallibility)
+[5](https://en.wikipedia.org/wiki/Paraconsistent_logic)
+[6](https://plato.stanford.edu/entries/logic-paraconsistent/)
+[7](https://www.sciencedirect.com/science/article/pii/S1570868304000564)
+[8](http://dlibra.bg.ajd.czest.pl:8080/Content/719)
+[9](https://en.wikipedia.org/wiki/Antifragility)
+[10](https://www.nature.com/articles/s44260-024-00014-y)
+[11](http://iupress.istanbul.edu.tr/en/journal/felsefearkivi/article/uber-poppers-forderung-nach-widerspruchlosigkeit)
+[12](https://plato.stanford.edu/entries/lakatos/)
+[13](https://mariannetalbot.co.uk/2016/01/26/the-inconsistency-of-science/)
+[14](https://study.com/academy/lesson/philosophy-of-logic-overview-examples.html)
+[15](https://plato.stanford.edu/archives/fall2011/entries/logic-ai/)
+[16](https://piercecomerford.com/posts/stringtheoryparaconsistency/)
+"""
