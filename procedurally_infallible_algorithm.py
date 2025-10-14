@@ -1,5 +1,6 @@
 """
-Procedurally Infallible Algorithm System
+Procedurally Infallible Algorithm System v.1 
+Note to Reader:(See procedurally_infallible_algorithm_v2.py for production-ready v.2)
 Implements Generative Logic from Principia Generativarum treatise
 
 Architecture:
