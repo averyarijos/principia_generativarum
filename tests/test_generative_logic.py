@@ -7,8 +7,8 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
-from PrincipiaGenerativarum.generativity import generative_logic as gl
-from PrincipiaGenerativarum.generativity.generative_logic import Proposition
+from . import generative_logic as gl
+from generative_logic import Proposition
 
 
 def deterministic_expansion(contradiction):
