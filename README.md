@@ -42,14 +42,19 @@ This architecture enables non-Markovian memory, temporal recursion, and ontologi
 ### Mathematical exposition (LaTeX rendered in Markdown)
 
 #### 1. Basic objects and state-space
-- Generative truth alphabet: $T = \{\mathrm{T},\mathrm{F},\mathrm{S}\}$.  
-   Interpret $S$ as the scarred (metabolized) truth-token produced by resolving or archiving a contradiction.
+
+- Generative truth alphabet: $T=\{\mathrm{T},\mathrm{F},\mathrm{S}\}$.  
+   Interpret $\mathrm{S}$ as the scarred (metabolized) truth-token produced by resolving or archiving a contradiction.
 
 - Proposition space: let $\mathcal{P}$ be the set of atomic and compound propositions. A proposition is represented by a tuple
-   $$p=(\mathrm{content}(p),\;\mathrm{meta}(p),\;\mathrm{contradictions}(p))\in\mathcal{P}.$$
+   $$
+   p=\bigl(\mathrm{content}(p),\;\mathrm{meta}(p),\;\mathrm{contradictions}(p)\bigr)\in\mathcal{P}.
+   $$
 
 - Generative state: define the system state as
-   $$\Sigma=(\nu,\;\mathcal{X},\;\mathcal{M},\;h)$$
+   $$
+   \Sigma=(\nu,\;\mathcal{X},\;\mathcal{M},\;h)
+   $$
    where
    - $\nu\in\{\mathrm{G1},\mathrm{G2},\mathrm{G3},\mathrm{GW}\}$ is a coarse generative truth level,
    - $\mathcal{X}\subseteq\mathcal{P}$ is the possibility space,
@@ -57,101 +62,150 @@ This architecture enables non-Markovian memory, temporal recursion, and ontologi
    - $h\in[0,100]$ is the health score.
 
 #### 2. Algebraic structure and lattice extension
-- Extend the classical boolean algebra $(\{\mathrm{T},\mathrm{F}\},\land,\lor,\neg)$ to a three-valued structure $(T,\wedge_T,\vee_T,\star)$ with $S$ as a distinguished value. A convenient partial order is
-   $$\mathrm{F}\preceq\mathrm{S}\preceq\mathrm{T},$$
+
+- Extend the classical Boolean algebra $(\{\mathrm{T},\mathrm{F}\},\land,\lor,\neg)$ to a three-valued structure $(T,\wedge_T,\vee_T,\star)$ with $\mathrm{S}$ as a distinguished value. A convenient partial order is
+   $$
+   \mathrm{F}\preceq\mathrm{S}\preceq\mathrm{T},
+   $$
    making $(T,\preceq)$ a bounded poset with $\inf=\mathrm{F}$ and $\sup=\mathrm{T}$. Meet and join may be defined by
-   $$a\wedge_T b = \inf\{a,b\},\qquad a\vee_T b=\sup\{a,b\},$$
+   $$
+   a\wedge_T b=\inf\{a,b\},\qquad a\vee_T b=\sup\{a,b\},
+   $$
    with the convention that contradictory pairs are mapped through metabolism into $\mathrm{S}$.
 
 #### 3. Core operators (formal definitions)
+
 - Zero-degree metabolism (operator $\odot_0$):
-   $$\odot_0:\; \mathcal{C}\to S,\qquad \odot_0(\{p,\neg p\}) = s$$
+   $$
+   \odot_0:\;\mathcal{C}\to\mathcal{S},\qquad \odot_0(\{p,\neg p\})=s,
+   $$
    where $\mathcal{C}\subseteq\mathcal{P}^2$ are detected contradictions and $s\in\mathcal{S}$ is a scar object (see §4). $\odot_0$ is idempotent on scars: $\odot_0(s)=s$.
 
 - Generative negation ($\nabla_g$):
-   $$\nabla_g:\;\mathcal{P}\to\mathcal{P}^+, \qquad \nabla_g(p)=\{p'\mid p'\text{ expands the possibility set consistent with }p\}.$$
-   $\nabla_g$ is non-erasing: $p\in\nabla_g(p)$ or else some archived scar preserves $p$'s information.
+   $$
+   \nabla_g:\;\mathcal{P}\to\mathcal{P}^+,\qquad \nabla_g(p)=\{p'\mid p'\ \text{expands the possibility set consistent with }p\}.
+   $$
+   $\nabla_g$ is non-erasing: either $p\in\nabla_g(p)$ or some archived scar preserves $p$'s information.
 
 - Metabolic composition ($\oplus$):
-   $$\oplus:\;\mathcal{P}^m\to\mathcal{P},\qquad \oplus(p_1,\dots,p_m)=p^*$$
-   where $p^*$ is a proposition synthesizing contents and scars of inputs; $\oplus$ is generally non-associative and designed to favor generativity (increase in possibility measure).
+   $$
+   \oplus:\;\mathcal{P}^m\to\mathcal{P},\qquad \oplus(p_1,\dots,p_m)=p^*,
+   $$
+   where $p^*$ is a proposition synthesizing contents and scars of inputs; $\oplus$ is generally non-associative and is designed to favor generativity (increase in a possibility measure).
 
 #### 4. Scar logic: data and transition dynamics
+
 - Scar archive $\mathcal{S}$ is a finite sequence of scars. Each scar $s\in\mathcal{S}$ is a record
-   $$s=(\mathrm{id},\;c,\;\tau,\;\mu,\;\alpha)$$
+   $$
+   s=(\mathrm{id},\;c,\;\tau,\;\mu,\;\alpha)
+   $$
    where $c$ is the contradiction, $\tau$ a timestamp, $\mu$ a metabolic protocol, and $\alpha\in\{\mathtt{true},\mathtt{false}\}$ an authorization flag.
 
 - State transition function:
-   $$\delta:\; \Sigma\times\mathcal{I}\times\mathcal{S}\to\Sigma,$$
+   $$
+   \delta:\; \Sigma\times\mathcal{I}\times\mathcal{S}\to\Sigma,
+   $$
    where $\mathcal{I}$ are inputs. Crucially, $\delta$ itself is subject to rewrite by scars: if $s$ applies, then
-   $$\delta\mapsto \delta\circ\mu_s,$$
+   $$
+   \delta\mapsto \delta\circ\mu_s,
+   $$
    with $\mu_s$ being the metabolic rewrite induced by scar $s$.
 
 - Metabolic protocol:
-   $$\mu:\; \text{Contradiction}\to(\Sigma\to\Sigma).$$
+   $$
+   \mu:\; \text{Contradiction}\to(\Sigma\to\Sigma).
+   $$
    For contradiction $c$, $\mu(c)$ is a state transformer that (i) archives $c$, (ii) yields new possibilities, and (iii) updates $h$ and $\mathcal{M}$.
 
 - Authorization predicate $\psi$:
-   $$\psi:\mathcal{S}\to\{\mathtt{true},\mathtt{false}\}.$$
+   $$
+   \psi:\mathcal{S}\to\{\mathtt{true},\mathtt{false}\}.
+   $$
    A scar only affects $\delta$ when $\psi(s)=\mathtt{true}$. This imposes coherence and safety gates.
 
 #### 5. Induction operators and update semantics
+
 - Scar-Induction $\mathcal{I}_s$ (witnessing):
-   $$\mathcal{I}_s:\;\Sigma\times\mathcal{C}\to\Sigma,\qquad \mathcal{I}_s(\Sigma,c)=\Sigma'$$
+   $$
+   \mathcal{I}_s:\;\Sigma\times\mathcal{C}\to\Sigma,\qquad \mathcal{I}_s(\Sigma,c)=\Sigma'
+   $$
    where $\Sigma'$ equals $\Sigma$ with $c$ appended to $\mathcal{S}$ and with $\mathcal{X}$ expanded according to $\mu(c)$.
 
 - Bloom-Induction $\mathcal{I}_b$ (amplification):
-   $$\mathcal{I}_b:\;\Sigma\to\Sigma,\qquad \mathcal{I}_b(\Sigma)=\Sigma^+$$
+   $$
+   \mathcal{I}_b:\;\Sigma\to\Sigma,\qquad \mathcal{I}_b(\Sigma)=\Sigma^+
+   $$
    where $\Sigma^+$ increases multiplicities or weights of successful patterns in $\mathcal{X}$ and may prune low-coherence elements.
 
 - Update function (Upd):
-   $$\mathrm{Upd}:\; \Sigma\times\{\mathcal{I}_s,\mathcal{I}_b\}\to\Sigma.$$
+   $$
+   \mathrm{Upd}:\; \Sigma\times\{\mathcal{I}_s,\mathcal{I}_b\}\to\Sigma.
+   $$
    Iteration defines an O-loop sequence $\{\Sigma_n\}_{n\ge 0}$:
-   $$\Sigma_{n+1}=\mathrm{Upd}(\Sigma_n,\;\mathcal{I}_s,\mathcal{I}_b).$$
+   $$
+   \Sigma_{n+1}=\mathrm{Upd}(\Sigma_n,\;\mathcal{I}_s,\mathcal{I}_b).
+   $$
 
-- Generativity metric $G(\Sigma)$ with desired property
-   $$\frac{d}{dt}G(\Sigma_t)>0$$
+- Generativity metric $G(\Sigma)$ with the desired property
+   $$
+   \frac{d}{dt}G(\Sigma_t)>0
+   $$
    in operational runs, meaning successive updates should non-decrease the generativity measure under admissible operations.
 
 #### 6. Axioms and principal theorems (formalized)
-- Axiom gL1 (Contradiction Tolerance): For any contradiction $c$, $\odot_0(c)=s$ exists and $\exists\mu$ such that $\mu(c)$ is defined. Formally:
-   $$\forall c\in\mathcal{C}\;\exists s\in\mathcal{S}:\; s=\odot_0(c).$$
 
-- Theorem gL-T1 (Contradiction Productivity): For any contradiction $c$ with authorized scar $s$, metabolic application expands possibility measure:
-   $$\psi(s)=\mathtt{true}\implies | \mathcal{X}'| > |\mathcal{X}|$$
+- Axiom gL1 (Contradiction Tolerance): For any contradiction $c$, $\odot_0(c)=s$ exists and $\exists\mu$ such that $\mu(c)$ is defined. Formally:
+   $$
+   \forall c\in\mathcal{C}\;\exists s\in\mathcal{S}:\; s=\odot_0(c).
+   $$
+
+- Theorem gL-T1 (Contradiction Productivity): For any contradiction $c$ with authorized scar $s$, metabolic application expands the possibility measure:
+   $$
+   \psi(s)=\mathtt{true}\implies \lvert\mathcal{X}'\rvert>\lvert\mathcal{X}\rvert,
+   $$
    where $\mathcal{X}'$ is the updated possibility space after $\mu(c)$ (subject to coherence gates).
 
 - Theorem gL-T2 (Recursive Enhancement): Repeated application yields non-decreasing generativity level:
-   $$\forall n\quad G(\Sigma_{n+1})\ge G(\Sigma_n),$$
-   and under amplifying $\mathcal{I}_b$ steps, a strict increase occurs.
+   $$
+   \forall n\quad G(\Sigma_{n+1})\ge G(\Sigma_n),
+   $$
+   and under amplifying $\mathcal{I}_b$ steps a strict increase can occur.
 
 - Theorem gL-T3 (Scar Preservation): Scar objects are persistent memory and induce rewrite rules for $\delta$:
-   $$s\in\mathcal{S}\implies s\text{ contributes a non-forgetting rule to }\delta.$$
+   $$
+   s\in\mathcal{S}\implies s\ \text{contributes a non-forgetting rule to }\delta.
+   $$
 
-- Theorem gL-T4 (Non-Explosion): The system avoids trivial explosion: there is no derivation-rule $\vdash$ such that $\forall p\; \vdash p$ follows from a contradiction. More formally, the inference closure under metabolic logic does not collapse to the set of all propositions:
-   $$\neg\bigl(\exists c\in\mathcal{C}:\;\mathrm{Closure}(\Sigma\cup\{c\})=\mathcal{P}\bigr).$$
-
-   Proof sketch: because contradictions are intercepted by $\odot_0$ and mapped to scar-state transformations that are gated by $\psi$, classical explosion ($c\vdash p$ for all $p$) cannot occur unless authorization and coherence thresholds are violated; these thresholds are design invariants.
+- Theorem gL-T4 (Non-Explosion): The system avoids trivial explosion: there is no derivation rule $\vdash$ such that $\forall p\; \vdash p$ follows from a contradiction. More formally, the inference closure under metabolic logic does not collapse to the set of all propositions:
+   $$
+   \neg\bigl(\exists c\in\mathcal{C}:\;\mathrm{Closure}(\Sigma\cup\{c\})=\mathcal{P}\bigr).
+   $$
+   Proof sketch: contradictions are intercepted by $\odot_0$ and mapped to scar-state transformations gated by $\psi$, so classical explosion cannot occur unless authorization and coherence thresholds are violated; these thresholds are design invariants.
 
 #### 7. Complexity and bounds
-- Contradiction detection: linear-time in input size, $O(n)$, with potential AST-based improvement to $O(n_{\text{AST}})$.
-- Metabolism application (per scar): $O(k)$ where $k=|\mathcal{S}|$, with caching to amortize repeated protocol applications.
-- Possibility-space growth: exponential in composition depth in the absence of gates; practical upper bound enforced by $\mathtt{max\_possibilities}$ and coherence threshold $c_{\min}$.
+
+- Contradiction detection: linear-time in input size, $O(n)$, with potential AST-based improvement to $O(n_{\mathrm{AST}})$.
+- Metabolism application (per scar): $O(k)$ where $k=\lvert\mathcal{S}\rvert$, with caching to amortize repeated protocol applications.
+- Possibility-space growth: exponential in composition depth absent gates; practical upper bounds are enforced by $\mathtt{max\_possibilities}$ and coherence threshold $c_{\min}$.
 
 #### 8. Small formal example
+
 Let $p$ and $\neg p$ be contradictory inputs. Then
 1. detect: $c=\{p,\neg p\}$,
 2. scar: $s=\odot_0(c)$,
 3. authorize: if $\psi(s)=\mathtt{true}$, apply $\mu(c)$ producing $\Sigma'$ with
-    $$\mathcal{X}'=\mathcal{X}\cup\{s,\;p^\star\},\qquad G(\Sigma')>G(\Sigma).$$
+    $$
+    \mathcal{X}'=\mathcal{X}\cup\{s,\;p^\star\},\qquad G(\Sigma')>G(\Sigma).
+    $$
 
-This formalizes the informal slogan: "From contradiction, a scar; from scar, new possibility."
+This formalizes the slogan: "From contradiction, a scar; from scar, new possibility."
 
 #### 9. Remarks on formal extensions
-- One may embed this framework into category theory: scars as morphisms rewriting the endofunctor $\delta$ on the category of states; metabolism protocols as natural transformations.
+
+- Category-theoretic embedding: scars as morphisms rewriting the endofunctor $\delta$ on the category of states; metabolism protocols as natural transformations.
 - Probabilistic or measure-theoretic generativity: equip $\mathcal{X}$ with a measure $\mu_{\mathcal{X}}$ and require $\mu_{\mathcal{X}}(\mathcal{X}_{n+1})>\mu_{\mathcal{X}}(\mathcal{X}_n)$ under authorized metabolism.
 
-This exposition supplies a compact mathematical scaffold suitable for rigorous implementation, formal verification, and subsequent extension to probabilistic/learning-based generative strategies.
+This exposition supplies a compact mathematical scaffold suitable for implementation, formal verification, and extension to probabilistic or learning-based generative strategies.
 
 ## System Architecture
 
