@@ -1,10 +1,10 @@
 # Principia Generativarum: A Computational Philosophy of Generative Logic
 
-> *From contradiction, anything can follow—but in this system, what follows is possibility.*
+> *From contradiction, anything can follow — but in this system, what follows is possibility.*
 
 ## Abstract
 
-The *Principia Generativarum* represents a radical reimagining of the foundations of logic, metaphysics, and philosophy. Authored by Avery Alexander Rijos, this work emerges from lived experience—premature birth, survival, trauma, and rupture—to demonstrate that contradiction, absence, and impossibility are not failures of thought but engines of Generativity. Through the Metaformalist Paradigm and Transcendental Induction Logics (TIL), the manuscript formalizes postmodern and post-structuralist insights into coherent logical systems, bridging the analytic-continental divide.
+The *Principia Generativarum* represents a radical reimagining of the foundations of logic, metaphysics, and philosophy. Authored by Avery Alexander Rijos, this work emerges from lived experience — premature birth, survival, trauma, and rupture — to demonstrate that contradiction, absence, and impossibility are not failures of thought but engines of Generativity. Through the Metaformalist Paradigm and Transcendental Induction Logics (TIL), the manuscript (*principia_generativarum.md*) formalizes postmodern and post-structuralist insights into coherent logical systems, bridging the analytic-continental divide.
 
 This repository serves as the computational companion to the *Principia Generativarum*, implementing its core concepts in Python. It provides working prototypes of generative logic systems, scar metabolism, and metaformalist operators, demonstrating how contradictions can fuel recursive transformation rather than logical collapse. The implementations are designed as proofs-of-concept, showing that philosophical ideas like Derrida's *différance* or Foucault's power structures can be operationalized into computable engines.
 
