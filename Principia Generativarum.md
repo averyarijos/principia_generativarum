@@ -1,5 +1,7 @@
 # 1 The Principles of Generativity 
 
+# CORPUS FOR REPOSITORY
+
 **BY AVERY ALEXANDER RIJOS**
 
 *Principia Generativarum*, or *The Principles of Generativity* reimagines the foundations of logic, metaphysics, and philosophy by treating contradiction, absence, and impossibility not as failures of thought but as engines of Generativity. Beginning from lived experience—premature birth, survival, trauma, and rupture—the work grounds its inquiry in the intimate ways contradiction structures existence. From there, it develops the Metaformalist Paradigm, a systematic framework that formalizes postmodern and post-structuralist insights through Transcendental Induction Logics (TIL). Unlike classical logic, which seeks consistency and closure, TIL treats contradiction as a Structured Anomaly Token, a Generative operator that fuels recursive transformation.
