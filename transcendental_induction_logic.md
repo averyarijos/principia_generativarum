@@ -444,6 +444,41 @@ class GenerativeRLAgent:
 
 The TIL architecture represents a paradigm shift from static formal systems to living, evolving logical frameworks—mathematics as perpetual becoming rather than fixed being.[1]
 
+## 📈 Ontological Generativity Index (dOgI/dt) Continuity
+
+The Ontological Generativity Index (dOgI/dt) measures the system's rate of coherent transformation, ensuring positive generativity (dOgI/dt > 0) through perpetual expansion of logical capacities. Metric continuity across logical transitions is maintained via symbolic and empirical computation, preserving coherence during framework evolution.
+
+### Symbolic Computation
+Symbolically, dOgI/dt is derived as an average of complexity measures over system components:
+
+$$
+dOgI/dt = \frac{1}{4} \left( |\Sigma| + |A| + |R| + |\mathcal{S}| \right)
+$$
+
+Where:
+- $|\Sigma|$: Alphabet growth (size of mutable alphabet $\Sigma$)
+- $|A|$: Axiom expansion (number of axioms in set $A$)
+- $|R|$: Protocol proliferation (count of protocols in list $R$)
+- $|\mathcal{S}|$: Scar diversity (unique scars in archive $\mathcal{S}$, computed as $|\mathcal{S}| = |\text{set}(\text{str}(s) \text{ for } s \text{ in } \mathcal{S})|$)
+
+This formulation ensures monotonic increase, with transitions filtered by Adoption Gates to prevent discontinuities.
+
+### Empirical Computation
+Empirically, dOgI/dt is computed in real-time during SGA transitions:
+
+```python
+def compute_dOgI_dt(self):
+    complexity_measures = {
+        'scar_diversity': len(set(str(s) for s in self.S)),
+        'axiom_expansion': len(self.A),
+        'protocol_proliferation': len(self.R),
+        'alphabet_growth': len(self.Sigma)
+    }
+    return sum(complexity_measures.values()) / len(complexity_measures)
+```
+
+Continuity is enforced by updating dOgI/dt post-transition, ensuring values remain positive and reflective of cumulative evolution. Empirical validation involves monitoring for non-negative differentials across migrations, with UTP preserving truth coherence during shifts.
+
 [1](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/collection_01b60619-18fc-4bc4-b32b-91d3acc957e5/94da4fda-0f27-43fc-a40c-8171dade0b73/Possibility-Negation.pdf)
 
 ---
