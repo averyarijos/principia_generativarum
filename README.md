@@ -333,7 +333,7 @@ Performance benchmarks ensure computational feasibility:
 ## Repository Structure
 
 ```
-projects/
+.
 ├── Principia Generativarum.md          # Core philosophical manuscript (24466 lines)
 ├── sga.py                              # Super-Generative Automaton prototype
 ├── transcendental_induction_logic.md   # TIL specification document
@@ -356,10 +356,6 @@ projects/
 │   │   └── README.md                   # Axiom documentation
 │   ├── supergenerative/                # Super-generative intelligence
 │   │   └── README.md                   # AGI implications
-│   ├── critical_theory/                # Generative critical theory
-│   │   └── README.md                   # Critique framework
-│   ├── mythologies/                    # Mythic frameworks
-│   │   └── README.md                   # Narrative structures
 │   └── labyrinth/                      # Heart's labyrinth
 │       └── README.md                   # Phenomenological exploration
 ├── tests/                              # Test suite
