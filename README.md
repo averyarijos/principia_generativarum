@@ -1,4 +1,4 @@
-# Principia Generativarum - Programming Projects
+# Principia Generativarum - Software Projects
 
 A collection of programming projects by Avery Alexander Rijos, focusing on philosophical and computational explorations of generative logic, metaformalism, and paraconsistent mathematics. This repository serves as a computational companion to the *Principia Generativarum*, a philosophical treatise that reimagines the foundations of logic, metaphysics, and philosophy by treating contradiction, absence, and impossibility not as failures but as engines of Generativity. Drawing from lived experience—premature birth, survival, trauma, and rupture—the work grounds its inquiry in the intimate ways contradiction structures existence, developing the Metaformalist Paradigm through Transcendental Induction Logics (TIL) to formalize postmodern and post-structuralist insights.
 
