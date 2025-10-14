@@ -11,7 +11,7 @@ components:
 - R: a history of operational protocols (procedures or rituals the system runs).
 - S: an archive of "scars" — persistent records produced by ruptures/contradictions.
 - Gamma: current glyph-states (a key-value store representing the system's local state).
-- Psi: a transcendental/haunted recursion function that reinterprets inputs in light
+- Psi: a transcendental/hauntological (e.g., Jacques Derrida) recursion function that reinterprets inputs in light
     of scars and axioms.
 - ogi_rate: a monitored metric (Ontopolitical Generativity Index) capturing an
     instance-level generativity rate over time.
