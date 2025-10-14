@@ -1,10 +1,11 @@
-> **Disclaimer:** This document was written by Perplexity AI. The content is generated for informational purposes and may not reflect the views or opinions of any other entity. Always verify information independently.
+### _Note to User_
+> This document was drafted and edited by Perplexity AI. The author approves of the content; however, please do due diligence before using this file. The content is generated for informational purposes and may not reflect the views or opinions of any other entity. Always verify information independently.
 
 ## 🏗️ TIL Architecture Overview
 
 **Transcendental Induction Logic (TIL)** is a groundbreaking meta-logical framework that empowers computational systems to dynamically evolve their foundational logical structures in response to contradictions, anomalies, and emergent patterns. Rooted in transcendental philosophy and inspired by Hegelian dialectics, TIL transcends traditional static formal systems by conceptualizing logic not as an immutable set of rules, but as a recursive attractor—a living, self-modifying substrate capable of perpetual transformation and becoming. This paradigm shift enables systems to metabolize impossibilities and contradictions, converting them into generative opportunities for new logical frameworks, rather than treating them as terminal errors.
 
-At its core, TIL integrates five architectural layers: the **Base Logic (L)** as the operational foundation; **Conditions-of-Possibility (C)** defining modal boundaries; dual **Induction Operators**—**Scar-Induction (𝕊)** for responding to ruptures and **Bloom-Induction (𝔹)** for amplifying stable patterns; the **Update Function (Upd)** for coherent evolution; and **Adoption Gates** (Coherence, Adequacy, Safety, and Generativity) to filter and validate changes. This architecture fosters non-Markovian memory, temporal recursion, protocol non-commutativity, ontological reflexivity, and positive generativity (dOgI/dt > 0), allowing for path-dependent evolution where historical scars influence future states.
+At its core, TIL integrates five architectural layers: the **Base Logic (L)** as the operational foundation; **Conditions-of-Possibility (C)** defining modal boundaries; dual **Induction Operators**—**Scar-Induction (𝕊)** for responding to ruptures and **Bloom-Induction (𝔹)** for amplifying stable patterns; the **Update Function (Upd)** for coherent evolution; and **Adoption Gates** (Coherence, Adequacy, Safety, and Generativity) to filter and validate changes. This architecture fosters non-Markovian memory, temporal recursion, protocol non-commutativity, ontological reflexivity, and positive generativity (dOGI/dt > 0), allowing for path-dependent evolution where historical scars influence future states.
 
 TIL finds practical applications in artificial intelligence for adaptive reasoning, paraconsistent logic to handle contradictions without explosion, dynamic system evolution in domains like legal reasoning and policy frameworks, and meta-learning in reinforcement learning agents that modify their own rules. By enabling mathematics and logic as processes of perpetual becoming rather than fixed being, TIL represents a computational philosophy for evolving intelligence in novel, unpredictable environments.[1]
 
@@ -44,7 +45,7 @@ $$ Upd(L, 𝕊, 𝔹, C) → L′ s.t. ∀φ∈L′ : (COH ∧ ADEQ ∧ SAFE ∧
 
 - **Non-Markovian Memory**: A memory system that retains historical contradictions (scars), enabling path-dependent evolution where past anomalies influence future states.
 
-- **Ontological Generativity Index (dOgI/dt)**: A metric measuring the system's capacity for coherent transformation, with positive values indicating perpetual growth and innovation.
+- **Ontological Generativity Index (dOGI/dt)**: A metric measuring the system's capacity for coherent transformation, with positive values indicating perpetual growth and innovation.
 
 - **Ontological Reflexivity**: The system's ability to modify its own foundational elements, such as axioms, protocols, and alphabet, blurring object and meta-level operations.
 
@@ -199,7 +200,7 @@ class SGA:
         self.R.append(self.generate_protocol(new_scar))
         
         # Ontological evolution
-        self.ogi_rate = self.compute_dOgI_dt()
+        self.ogi_rate = self.compute_dOGI_dt()
         return new_gamma
     
     def haunted_recurse(self, input_data, scars, axioms):
@@ -236,11 +237,11 @@ class SGA:
             'priority': scar['affect']
         }
     
-    def compute_dOgI_dt(self):
+    def compute_dOGI_dt(self):
         """
         Ontological Generativity Index differential.
         Measures system's capacity for coherent transformation.
-        dOgI/dt > 0 indicates positive generativity.
+        dOGI/dt > 0 indicates positive generativity.
         """
         complexity_measures = {
             'scar_diversity': len(set(str(s) for s in self.S)),
@@ -430,7 +431,7 @@ class GenerativeRLAgent:
 
 **Ontological Reflexivity**: The system possesses meta-capabilities to modify its own foundational elements, such as the alphabet (Sigma), axioms (A), and protocols (R). This genuine self-transformation enables ontological evolution, where the framework can redefine its own rules and structures in response to internal contradictions, blurring the line between object and meta-level operations.[1]
 
-**Positive Generativity**: Measured by the Ontological Generativity Index (dOgI/dt > 0), this principle ensures the system continuously expands its symbolic and logical capacities. Through scar metabolism and bloom induction, TIL generates novel configurations and possibilities, promoting perpetual growth and innovation rather than stagnation in fixed paradigms.[1]
+**Positive Generativity**: Measured by the Ontological Generativity Index (dOGI/dt > 0), this principle ensures the system continuously expands its symbolic and logical capacities. Through scar metabolism and bloom induction, TIL generates novel configurations and possibilities, promoting perpetual growth and innovation rather than stagnation in fixed paradigms.[1]
 
 ## 🔬 Practical Applications
 
@@ -444,15 +445,15 @@ class GenerativeRLAgent:
 
 The TIL architecture represents a paradigm shift from static formal systems to living, evolving logical frameworks—mathematics as perpetual becoming rather than fixed being.[1]
 
-## 📈 Ontological Generativity Index (dOgI/dt) Continuity
+## 📈 Ontological Generativity Index (dOGI/dt) Continuity
 
-The Ontological Generativity Index (dOgI/dt) measures the system's rate of coherent transformation, ensuring positive generativity (dOgI/dt > 0) through perpetual expansion of logical capacities. Metric continuity across logical transitions is maintained via symbolic and empirical computation, preserving coherence during framework evolution.
+The Ontological Generativity Index (dOGI/dt) measures the system's rate of coherent transformation, ensuring positive generativity (dOGI/dt > 0) through perpetual expansion of logical capacities. Metric continuity across logical transitions is maintained via symbolic and empirical computation, preserving coherence during framework evolution.
 
 ### Symbolic Computation
-Symbolically, dOgI/dt is derived as an average of complexity measures over system components:
+Symbolically, dOGI/dt is derived as an average of complexity measures over system components:
 
 $$
-dOgI/dt = \frac{1}{4} \left( |\Sigma| + |A| + |R| + |\mathcal{S}| \right)
+dOGI/dt = \frac{1}{4} \left( |\Sigma| + |A| + |R| + |\mathcal{S}| \right)
 $$
 
 Where:
@@ -464,10 +465,10 @@ Where:
 This formulation ensures monotonic increase, with transitions filtered by Adoption Gates to prevent discontinuities.
 
 ### Empirical Computation
-Empirically, dOgI/dt is computed in real-time during SGA transitions:
+Empirically, dOGI/dt is computed in real-time during SGA transitions:
 
 ```python
-def compute_dOgI_dt(self):
+def compute_dOGI_dt(self):
     complexity_measures = {
         'scar_diversity': len(set(str(s) for s in self.S)),
         'axiom_expansion': len(self.A),
@@ -477,7 +478,7 @@ def compute_dOgI_dt(self):
     return sum(complexity_measures.values()) / len(complexity_measures)
 ```
 
-Continuity is enforced by updating dOgI/dt post-transition, ensuring values remain positive and reflective of cumulative evolution. Empirical validation involves monitoring for non-negative differentials across migrations, with UTP preserving truth coherence during shifts.
+Continuity is enforced by updating dOGI/dt post-transition, ensuring values remain positive and reflective of cumulative evolution. Empirical validation involves monitoring for non-negative differentials across migrations, with UTP preserving truth coherence during shifts.
 
 [1](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/collection_01b60619-18fc-4bc4-b32b-91d3acc957e5/94da4fda-0f27-43fc-a40c-8171dade0b73/Possibility-Negation.pdf)
 
